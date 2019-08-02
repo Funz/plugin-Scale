@@ -1,0 +1,50 @@
+language: java
+matrix:
+  include:
+    - name: "Linux JDK8"
+      os: linux
+      dist: trusty
+      jdk:
+        - openjdk8
+      env:
+        - TRAVIS_DIST_NAME="trusty"
+    - name: "MacOS JDK8"
+      os: osx
+      osx_image: xcode9.3
+#    - name: "Windows" --- Not yet supported
+#      os: windows
+#      jdk:
+#        - openjdk8
+
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then rm -f '/usr/local/include/c++'; brew install ant; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install ant -y; fi
+
+install:
+  - WD=$PWD
+  - cd ..
+  - git clone https://github.com/Funz/funz-profile
+  - cd $WD
+
+script: 
+  - ant test
+
+before_deploy:
+  - ant clean dist
+  - cd dist; zip -r ../plugin-Scale.zip *; cd ..
+  - ant install
+  - zip -r Funz-Scale.zip Funz-Scale
+  
+deploy:
+  provider: releases
+  api_key:
+    secure: ZF1xa95P8B5Xc8z6Ky/H1DNJeeFMNAR76WlwvSjzooJcRJb5QonfaHdK1P48/wEDy/ffhgYqyPo7doJp+R1WLyARgemEeTv+p+WyOrxxVngVtEp2FkE3+azP7Ehh7v5hbtPPWn/c0KBhaacRBIuU6XXseBPPFY6w5qSs18F5yspNaoVA22GyKhC7e9KbX528uBdIoI+P/j4fLfPCSaKuDas1qLR/MvUvMrtDlrqfWSrYadt0H2ZX56K9b+8sovnlz1CX3ce4m24WtuqfEhw2Vj0nIMmRHVdQ8pRzABUUMVDPkGuDGVjE2wW2ch+3yO0YBjOBml0V0l5VwmujIOcoW4p8WTougN0RNKkGtoEVic900iGODfkakxENXQY/S3UUgzes0ySvdwVxXoEnxz/cIQehmeg4u7VWHF3YLI9rP+jZtGiZfsynWEiD/skCRkrrhd0K3m7z/3EE+TjqplsCKvYUo+yrEClYfh/a603PcLgRK3Xk3hkrzeiJZvT6YSVo/+MbT6YGKYt6/Cf8dSIv5KoiYxyZXl1oZ4P9HAE0LkrpnrfPuKCH786S5lcfk258L0KV/Uw0ehBG6VjHXlE/BjsM03kIIPb4GQPvlWxjY/zmPZQ/XAW13WfKykHX5pN68Y6ZQD5LiHMGqR1UiIk1Ts6sB8xRnrIPtP+8fURNDa4=
+  file_glob: true
+  file:
+    - Funz-*.zip
+    - plugin-*.zip
+  on:
+    tags: true
+    branch: master
+  skip_cleanup: true
+  overwrite: true

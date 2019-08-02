@@ -1,0 +1,16 @@
+variableStartSymbol=&
+variableLimit=(...)
+formulaStartSymbol=@
+formulaLimit={...}
+
+commentLineChar='
+
+datasetFilter=contains("(.*)","=xsdrnpm") | contains("(.*)","=csas1x")
+
+
+outputlist=lambda
+outputfunctions=Numeric:lambda
+
+output.lambda.if=true
+output.lambda.get=grep("out.txt","lambda") >> get(0) >> between("lambda","production") >> asNumeric()
+output.lambda.default=1.0

@@ -1,0 +1,8 @@
+output.mean_E_lethargy=820684.0
+output.sigma_nubar=4.42196E-4
+output.mean_free_path=1.93135
+output.sigma_E_lethargy=2191.56
+output.sigma_keff=0.0019
+output.mean_nubar=2.59705
+output.sigma_free_path=0.00200548
+output.mean_keff=0.9996

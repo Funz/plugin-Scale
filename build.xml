@@ -1,0 +1,104 @@
+<project name="plugin-Cristal" default="test" basedir=".">
+
+    <!--property name="code.name" value="Cristal" /--> <!-- This property is not set because it will change over tasks (see later tasks) -->
+    <property name="install.dir" value="${basedir}/Funz-Cristal" />
+
+    <property name="funz.release" value="v1.9" />
+
+    <property name="build_plugin.xml" location="../funz-profile/build_plugin.xml" />
+    <import file="${build_plugin.xml}"/>
+	
+    <target name="dist" depends="dist-ioplugin"/>   
+	        
+    <target name="test">
+        <fileset id="ioplugins" dir="${ioplugin.dir}" includes="*.ioplugin"/>
+        <pathconvert pathsep="," property="ioplugins.list" refid="ioplugins">
+            <map from="${ioplugin.dir}/" to=""/>
+        </pathconvert>
+        
+        <for list="${ioplugins.list}" param="ioplugin" delimiter=",">
+            <sequential>
+                <property name="@{ioplugin}" value="@{ioplugin}"/>
+                <script language="javascript">
+                    arr = project.getProperty('@{ioplugin}');
+                    project.setProperty('@{ioplugin}.name', arr.replace('.ioplugin',''));
+                </script>
+                
+                <delete dir="${test.cases.dir}" />
+                <mkdir dir="${test.cases.dir}" />
+                <copy todir="${test.cases.dir}" failonerror="false">
+                    <fileset dir="${test.cases.dir}.${@{ioplugin}.name}">
+                        <include name="**" />
+                    </fileset>
+                </copy>
+
+                <antcall target="test-ioplugin">
+                    <param name="code.name" value="${@{ioplugin}.name}"/>
+                </antcall>
+            </sequential>
+        </for>
+    </target>
+    
+    <target name="run-all-reference-cases">
+        <fileset id="ioplugins" dir="${ioplugin.dir}" includes="*.ioplugin"/>
+        <pathconvert pathsep="," property="ioplugins.list" refid="ioplugins">
+            <map from="${ioplugin.dir}/" to=""/>
+        </pathconvert>
+        
+        <for list="${ioplugins.list}" param="ioplugin" delimiter=",">
+            <sequential>
+                <property name="@{ioplugin}" value="@{ioplugin}"/>
+                <script language="javascript">
+                    arr = project.getProperty('@{ioplugin}');
+                    project.setProperty('@{ioplugin}.name', arr.replace('.ioplugin',''));
+                </script>
+                
+                <delete dir="${test.cases.dir}" />
+                <mkdir dir="${test.cases.dir}" />
+                <copy todir="${test.cases.dir}" failonerror="false">
+                    <fileset dir="${test.cases.dir}.${@{ioplugin}.name}">
+                        <include name="**" />
+                    </fileset>
+                </copy>
+
+                <antcall target="run-reference-cases">
+                    <param name="code.name" value="${@{ioplugin}.name}"/>
+                </antcall>
+
+                <mkdir dir="${test.cases.dir}.${@{ioplugin}.name}" />
+                <copy todir="${test.cases.dir}.${@{ioplugin}.name}" failonerror="false">
+                    <fileset dir="${test.cases.dir}">
+                        <include name="**" />
+                    </fileset>
+                </copy>
+                <delete dir="${test.cases.dir}" />
+
+            </sequential>
+        </for>
+    </target>
+    	        
+    <target name="install">
+        <fileset id="ioplugins" dir="${ioplugin.dir}" includes="*.ioplugin"/>
+        <pathconvert pathsep="," property="ioplugins.list" refid="ioplugins">
+            <map from="${ioplugin.dir}/" to=""/>
+        </pathconvert>
+        
+        <for list="${ioplugins.list}" param="ioplugin" delimiter=",">
+            <sequential>
+                <property name="@{ioplugin}" value="@{ioplugin}"/>
+                <script language="javascript">
+                    arr = project.getProperty('@{ioplugin}');
+                    project.setProperty('@{ioplugin}.name', arr.replace('.ioplugin',''));
+                </script>
+
+                <antcall target="install-plugin">
+                    <param name="code.name" value="${@{ioplugin}.name}"/>
+                </antcall>
+            </sequential>
+        </for>
+    </target>
+
+    <target name="super.clean" depends="clean"/>
+    <target name="super.run-reference-cases" depends="run-reference-cases"/>
+
+</project>

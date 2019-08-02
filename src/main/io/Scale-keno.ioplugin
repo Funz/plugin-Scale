@@ -1,0 +1,48 @@
+variableStartSymbol=&
+variableLimit=(...)
+formulaStartSymbol=@
+formulaLimit={...}
+
+commentLineChar='
+
+datasetFilter=contains("(.*)","=csas26") | contains("(.*)","=csas6")
+
+
+outputlist=mean_keff sigma_keff mean_E_lethargy sigma_E_lethargy mean_nubar sigma_nubar mean_free_path sigma_free_path
+outputfunctions=GaussianDensity:mean_keff,sigma_keff
+
+
+output.mean_keff.if=true
+output.mean_keff.get=grep("(.*).out","best estimate system k-eff") >> get(0) >> between("k-eff","+ or -") >> asNumeric()
+output.mean_keff.default=1.0
+
+output.sigma_keff.if=true
+output.sigma_keff.get=grep("(.*).out","best estimate system k-eff") >> get(0) >> between("+ or -","***") >> asNumeric()
+output.sigma_keff.default=0.001
+
+
+output.mean_E_lethargy.if=true
+output.mean_E_lethargy.get=grep("(.*).out","Energy of average lethargy of Fission") >> get(0) >> between(")","+ or -") >> asNumeric()
+output.mean_E_lethargy.default=100
+
+output.sigma_E_lethargy.if=true
+output.sigma_E_lethargy.get=grep("(.*).out","Energy of average lethargy of Fission") >> get(0) >> between("+ or -","***") >> asNumeric()
+output.sigma_E_lethargy.default=10
+
+
+output.mean_nubar.if=true
+output.mean_nubar.get=grep("(.*).out","system nu bar") >> get(0) >> between("bar","+ or -") >> asNumeric()
+output.mean_nubar.default=1.0
+
+output.sigma_nubar.if=true
+output.sigma_nubar.get=grep("(.*).out","system nu bar") >> get(0) >> between("+ or -","***") >> asNumeric()
+output.sigma_nubar.default=0.001
+
+
+output.mean_free_path.if=true
+output.mean_free_path.get=grep("(.*).out","system mean free path") >> get(0) >> between(")","+ or -") >> asNumeric()
+output.mean_free_path.default=1.0
+
+output.sigma_free_path.if=true
+output.sigma_free_path.get=grep("(.*).out","system mean free path") >> get(0) >> between("+ or -","***") >> asNumeric()
+output.sigma_free_path.default=0.001

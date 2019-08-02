@@ -1,0 +1,450 @@
+variableStartSymbol=&
+variableLimit=(...)
+formulaStartSymbol=@
+formulaLimit={...}
+
+commentLineChar='
+
+datasetFilter=contains("(.*)","=tsunami-3d")
+
+
+outputlist=mean_sens_h1_total sigma_sens_h1_total mean_sens_h1_scatter sigma_sens_h1_scatter mean_sens_h1_capture sigma_sens_h1_capture mean_sens_o16_total sigma_sens_o16_total mean_sens_o16_scatter sigma_sens_o16_scatter mean_sens_o16_capture sigma_sens_o16_capture mean_sens_al27_total sigma_sens_al27_total mean_sens_al27_scatter sigma_sens_al27_scatter mean_sens_al27_capture sigma_sens_al27_capture mean_sens_ti48_total sigma_sens_ti48_total mean_sens_ti48_scatter sigma_sens_ti48_scatter mean_sens_ti48_capture sigma_sens_ti48_capture mean_sens_fe56_total sigma_sens_fe56_total mean_sens_fe56_scatter sigma_sens_fe56_scatter mean_sens_fe56_capture sigma_sens_fe56_capture mean_sens_c_total sigma_sens_c_total mean_sens_c_scatter sigma_sens_c_scatter mean_sens_c_capture sigma_sens_c_capture mean_sens_u235_total sigma_sens_u235_total mean_sens_u235_scatter sigma_sens_u235_scatter mean_sens_u235_capture sigma_sens_u235_capture mean_sens_u235_fission sigma_sens_u235_fission mean_sens_u235_nubar sigma_sens_u235_nubar mean_sens_u238_total sigma_sens_u238_total mean_sens_u238_scatter sigma_sens_u238_scatter mean_sens_u238_capture sigma_sens_u238_capture mean_sens_u238_fission sigma_sens_u238_fission mean_sens_u238_nubar sigma_sens_u238_nubar mean_sens_pu239_total sigma_sens_pu239_total mean_sens_pu239_scatter sigma_sens_pu239_scatter mean_sens_pu239_capture sigma_sens_pu239_capture mean_sens_pu239_fission sigma_sens_pu239_fission mean_sens_pu239_nubar sigma_sens_pu239_nubar mean_sens_pu240_total sigma_sens_pu240_total mean_sens_pu240_scatter sigma_sens_pu240_scatter mean_sens_pu240_capture sigma_sens_pu240_capture mean_sens_pu240_fission sigma_sens_pu240_fission mean_sens_pu240_nubar sigma_sens_pu240_nubar mean_keff sigma_keff mean_E_lethargy sigma_E_lethargy mean_nubar sigma_nubar mean_free_path sigma_free_path mean_sens_rh103_total sigma_sens_rh103_total mean_sens_rh103_scatter sigma_sens_rh103_scatter mean_sens_rh103_capture sigma_sens_rh103_capture mean_sens_mo95_total sigma_sens_mo95_total mean_sens_mo95_scatter sigma_sens_mo95_scatter mean_sens_mo95_capture sigma_sens_mo95_capture
+outputfunctions=GaussianDensity:mean_sens_fe56_capture,sigma_sens_fe56_capture
+
+
+output.mean_sens_mo95_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," mo ")
+output.mean_sens_mo95_total.get=grep("(.*).out"," mo-95        total") >> get(1) >> between("total","+\") >> asNumeric()
+output.mean_sens_mo95_total.default=0.0001
+
+output.sigma_sens_mo95_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," mo ")
+output.sigma_sens_mo95_total.get=grep("(.*).out"," mo-95        total") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_mo95_total.default=0.0001
+
+output.mean_sens_mo95_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," mo ")
+output.mean_sens_mo95_scatter.get=grep("(.*).out"," mo-95        scatter") >> get(1) >> between("scatter","+\") >> asNumeric()
+output.mean_sens_mo95_scatter.default=0.0001
+
+output.sigma_sens_mo95_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," mo ")
+output.sigma_sens_mo95_scatter.get=grep("(.*).out"," mo-95        scatter") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_mo95_scatter.default=0.0001
+
+output.mean_sens_mo95_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," mo ")
+output.mean_sens_mo95_capture.get=grep("(.*).out"," mo-95        capture") >> get(1) >> between("capture","+\") >> asNumeric()
+output.mean_sens_mo95_capture.default=0.0001
+
+output.sigma_sens_mo95_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," mo ")
+output.sigma_sens_mo95_capture.get=grep("(.*).out"," mo-95        capture") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_mo95_capture.default=0.0001
+
+
+
+
+
+output.mean_sens_h1_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," h ")
+output.mean_sens_h1_total.get=grep("(.*).out"," h-1          total") >> get(1) >> between("total","+\") >> asNumeric()
+output.mean_sens_h1_total.default=0.0001
+
+output.sigma_sens_h1_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," h ")
+output.sigma_sens_h1_total.get=grep("(.*).out"," h-1          total") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_h1_total.default=0.0001
+
+output.mean_sens_h1_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," h ")
+output.mean_sens_h1_scatter.get=grep("(.*).out"," h-1          scatter") >> get(1) >> between("scatter","+\") >> asNumeric()
+output.mean_sens_h1_scatter.default=0.0001
+
+output.sigma_sens_h1_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," h ")
+output.sigma_sens_h1_scatter.get=grep("(.*).out"," h-1          scatter") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_h1_scatter.default=0.0001
+
+output.mean_sens_h1_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," h ")
+output.mean_sens_h1_capture.get=grep("(.*).out"," h-1          capture") >> get(1) >> between("capture","+\") >> asNumeric()
+output.mean_sens_h1_capture.default=0.0001
+
+output.sigma_sens_h1_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," h ")
+output.sigma_sens_h1_capture.get=grep("(.*).out"," h-1          capture") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_h1_capture.default=0.0001
+
+
+
+
+
+output.mean_sens_o16_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," o ")
+output.mean_sens_o16_total.get=grep("(.*).out"," o-16         total") >> get(1) >> between("total","+\") >> asNumeric()
+output.mean_sens_o16_total.default=0.0001
+
+output.sigma_sens_o16_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," o ")
+output.sigma_sens_o16_total.get=grep("(.*).out"," o-16         total") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_o16_total.default=0.0001
+
+output.mean_sens_o16_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," o ")
+output.mean_sens_o16_scatter.get=grep("(.*).out"," o-16         scatter") >> get(1) >> between("scatter","+\") >> asNumeric()
+output.mean_sens_o16_scatter.default=0.0001
+
+output.sigma_sens_o16_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," o ")
+output.sigma_sens_o16_scatter.get=grep("(.*).out"," o-16         scatter") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_o16_scatter.default=0.0001
+
+output.mean_sens_o16_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," o ")
+output.mean_sens_o16_capture.get=grep("(.*).out"," o-16         capture") >> get(1) >> between("capture","+\") >> asNumeric()
+output.mean_sens_o16_capture.default=0.0001
+
+output.sigma_sens_o16_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," o ")
+output.sigma_sens_o16_capture.get=grep("(.*).out"," o-16         capture") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_o16_capture.default=0.0001
+
+
+
+
+
+output.mean_sens_al27_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," al ")
+output.mean_sens_al27_total.get=grep("(.*).out"," al-27        total") >> get(1) >> between("total","+\") >> asNumeric()
+output.mean_sens_al27_total.default=0.0001
+
+output.sigma_sens_al27_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," al ")
+output.sigma_sens_al27_total.get=grep("(.*).out"," al-27        total") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_al27_total.default=0.0001
+
+output.mean_sens_al27_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," al ")
+output.mean_sens_al27_scatter.get=grep("(.*).out"," al-27        scatter") >> get(1) >> between("scatter","+\") >> asNumeric()
+output.mean_sens_al27_scatter.default=0.0001
+
+output.sigma_sens_al27_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," al ")
+output.sigma_sens_al27_scatter.get=grep("(.*).out"," al-27        scatter") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_al27_scatter.default=0.0001
+
+output.mean_sens_al27_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," al ")
+output.mean_sens_al27_capture.get=grep("(.*).out"," al-27        capture") >> get(1) >> between("capture","+\") >> asNumeric()
+output.mean_sens_al27_capture.default=0.0001
+
+output.sigma_sens_al27_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," al ")
+output.sigma_sens_al27_capture.get=grep("(.*).out"," al-27        capture") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_al27_capture.default=0.0001
+
+
+
+output.mean_sens_ti48_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," ti ")
+output.mean_sens_ti48_total.get=grep("(.*).out"," ti-48        total") >> get(1) >> between("total","+\") >> asNumeric()
+output.mean_sens_ti48_total.default=0.0001
+
+output.sigma_sens_ti48_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," ti ")
+output.sigma_sens_ti48_total.get=grep("(.*).out"," ti-48        total") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_ti48_total.default=0.0001
+
+output.mean_sens_ti48_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," ti ")
+output.mean_sens_ti48_scatter.get=grep("(.*).out"," ti-48        scatter") >> get(1) >> between("scatter","+\") >> asNumeric()
+output.mean_sens_ti48_scatter.default=0.0001
+
+output.sigma_sens_ti48_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," ti ")
+output.sigma_sens_ti48_scatter.get=grep("(.*).out"," ti-48        scatter") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_ti48_scatter.default=0.0001
+
+output.mean_sens_ti48_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," ti ")
+output.mean_sens_ti48_capture.get=grep("(.*).out"," ti-48        capture") >> get(1) >> between("capture","+\") >> asNumeric()
+output.mean_sens_ti48_capture.default=0.0001
+
+output.sigma_sens_ti48_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," ti ")
+output.sigma_sens_ti48_capture.get=grep("(.*).out"," ti-48        capture") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_ti48_capture.default=0.0001
+
+
+output.mean_sens_fe56_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," fe ")
+output.mean_sens_fe56_total.get=grep("(.*).out"," fe-56        total") >> get(1) >> between("total","+\") >> asNumeric()
+output.mean_sens_fe56_total.default=0.0001
+
+output.sigma_sens_fe56_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," fe ")
+output.sigma_sens_fe56_total.get=grep("(.*).out"," fe-56        total") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_fe56_total.default=0.0001
+
+output.mean_sens_fe56_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," fe ")
+output.mean_sens_fe56_scatter.get=grep("(.*).out"," fe-56        scatter") >> get(1) >> between("scatter","+\") >> asNumeric()
+output.mean_sens_fe56_scatter.default=0.0001
+
+output.sigma_sens_fe56_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," fe ")
+output.sigma_sens_fe56_scatter.get=grep("(.*).out"," fe-56        scatter") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_fe56_scatter.default=0.0001
+
+output.mean_sens_fe56_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," fe ")
+output.mean_sens_fe56_capture.get=grep("(.*).out"," fe-56        capture") >> get(1) >> between("capture","+\") >> asNumeric()
+output.mean_sens_fe56_capture.default=0.0001
+
+output.sigma_sens_fe56_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," fe ")
+output.sigma_sens_fe56_capture.get=grep("(.*).out"," fe-56        capture") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_fe56_capture.default=0.0001
+
+
+
+
+output.mean_sens_c_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," c ")
+output.mean_sens_c_total.get=grep("(.*).out"," c            total") >> get(1) >> between("total","+\") >> asNumeric()
+output.mean_sens_c_total.default=0.0001
+
+output.sigma_sens_c_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," c ")
+output.sigma_sens_c_total.get=grep("(.*).out"," c            total") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_c_total.default=0.0001
+
+output.mean_sens_c_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," c ")
+output.mean_sens_c_scatter.get=grep("(.*).out"," c            scatter") >> get(1) >> between("scatter","+\") >> asNumeric()
+output.mean_sens_c_scatter.default=0.0001
+
+output.sigma_sens_c_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," c ")
+output.sigma_sens_c_scatter.get=grep("(.*).out"," c            scatter") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_c_scatter.default=0.0001
+
+output.mean_sens_c_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," c ")
+output.mean_sens_c_capture.get=grep("(.*).out"," c            capture") >> get(1) >> between("capture","+\") >> asNumeric()
+output.mean_sens_c_capture.default=0.0001
+
+output.sigma_sens_c_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," c ")
+output.sigma_sens_c_capture.get=grep("(.*).out"," c            capture") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_c_capture.default=0.0001
+
+
+
+output.mean_sens_u235_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-235 ")
+output.mean_sens_u235_total.get=grep("(.*).out"," u-235        total") >> get(1) >> between("total","+\") >> asNumeric()
+output.mean_sens_u235_total.default=0.0001
+
+output.sigma_sens_u235_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-235 ")
+output.sigma_sens_u235_total.get=grep("(.*).out"," u-235        total") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_u235_total.default=0.0001
+
+output.mean_sens_u235_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-235 ")
+output.mean_sens_u235_scatter.get=grep("(.*).out"," u-235        scatter") >> get(1) >> between("scatter","+\") >> asNumeric()
+output.mean_sens_u235_scatter.default=0.0001
+
+output.sigma_sens_u235_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-235 ")
+output.sigma_sens_u235_scatter.get=grep("(.*).out"," u-235        scatter") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_u235_scatter.default=0.0001
+
+output.mean_sens_u235_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-235 ")
+output.mean_sens_u235_capture.get=grep("(.*).out"," u-235        capture") >> get(1) >> between("capture","+\") >> asNumeric()
+output.mean_sens_u235_capture.default=0.0001
+
+output.sigma_sens_u235_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-235 ")
+output.sigma_sens_u235_capture.get=grep("(.*).out"," u-235        capture") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_u235_capture.default=0.0001
+
+output.mean_sens_u235_fission.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-235 ")
+output.mean_sens_u235_fission.get=grep("(.*).out"," u-235        fission") >> get(1) >> between("fission","+\") >> asNumeric()
+output.mean_sens_u235_fission.default=0.0001
+
+output.sigma_sens_u235_fission.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-235 ")
+output.sigma_sens_u235_fission.get=grep("(.*).out"," u-235        fission") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_u235_fission.default=0.0001
+
+output.mean_sens_u235_nubar.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-235 ")
+output.mean_sens_u235_nubar.get=grep("(.*).out"," u-235        nubar") >> get(1) >> between("nubar","+\") >> asNumeric()
+output.mean_sens_u235_nubar.default=0.0001
+
+output.sigma_sens_u235_nubar.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-235 ")
+output.sigma_sens_u235_nubar.get=grep("(.*).out"," u-235        nubar") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_u235_nubar.default=0.0001
+
+
+
+
+
+
+
+
+
+output.mean_sens_u238_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-238 ")
+output.mean_sens_u238_total.get=grep("(.*).out"," u-238        total") >> get(1) >> between("total","+\") >> asNumeric()
+output.mean_sens_u238_total.default=0.0001
+
+output.sigma_sens_u238_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-238 ")
+output.sigma_sens_u238_total.get=grep("(.*).out"," u-238        total") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_u238_total.default=0.0001
+
+output.mean_sens_u238_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-238 ")
+output.mean_sens_u238_scatter.get=grep("(.*).out"," u-238        scatter") >> get(1) >> between("scatter","+\") >> asNumeric()
+output.mean_sens_u238_scatter.default=0.0001
+
+output.sigma_sens_u238_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-238 ")
+output.sigma_sens_u238_scatter.get=grep("(.*).out"," u-238        scatter") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_u238_scatter.default=0.0001
+
+output.mean_sens_u238_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-238 ")
+output.mean_sens_u238_capture.get=grep("(.*).out"," u-238        capture") >> get(1) >> between("capture","+\") >> asNumeric()
+output.mean_sens_u238_capture.default=0.0001
+
+output.sigma_sens_u238_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-238 ")
+output.sigma_sens_u238_capture.get=grep("(.*).out"," u-238        capture") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_u238_capture.default=0.0001
+
+output.mean_sens_u238_fission.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-238 ")
+output.mean_sens_u238_fission.get=grep("(.*).out"," u-238        fission") >> get(1) >> between("fission","+\") >> asNumeric()
+output.mean_sens_u238_fission.default=0.0001
+
+output.sigma_sens_u238_fission.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-238 ")
+output.sigma_sens_u238_fission.get=grep("(.*).out"," u-238        fission") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_u238_fission.default=0.0001
+
+output.mean_sens_u238_nubar.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-238 ")
+output.mean_sens_u238_nubar.get=grep("(.*).out"," u-238        nubar") >> get(1) >> between("nubar","+\") >> asNumeric()
+output.mean_sens_u238_nubar.default=0.0001
+
+output.sigma_sens_u238_nubar.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," u-238 ")
+output.sigma_sens_u238_nubar.get=grep("(.*).out"," u-238        nubar") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_u238_nubar.default=0.0001
+
+
+
+
+
+
+output.mean_sens_pu239_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-239")
+output.mean_sens_pu239_total.get=grep("(.*).out"," pu-239       total") >> get(1) >> between("total","+\") >> asNumeric()
+output.mean_sens_pu239_total.default=0.0001
+
+output.sigma_sens_pu239_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-239")
+output.sigma_sens_pu239_total.get=grep("(.*).out"," pu-239       total") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_pu239_total.default=0.0001
+
+output.mean_sens_pu239_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-239")
+output.mean_sens_pu239_scatter.get=grep("(.*).out"," pu-239       scatter") >> get(1) >> between("scatter","+\") >> asNumeric()
+output.mean_sens_pu239_scatter.default=0.0001
+
+output.sigma_sens_pu239_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-239")
+output.sigma_sens_pu239_scatter.get=grep("(.*).out"," pu-239       scatter") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_pu239_scatter.default=0.0001
+
+output.mean_sens_pu239_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-239")
+output.mean_sens_pu239_capture.get=grep("(.*).out"," pu-239       capture") >> get(1) >> between("capture","+\") >> asNumeric()
+output.mean_sens_pu239_capture.default=0.0001
+
+output.sigma_sens_pu239_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-239")
+output.sigma_sens_pu239_capture.get=grep("(.*).out"," pu-239       capture") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_pu239_capture.default=0.0001
+
+output.mean_sens_pu239_fission.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-239")
+output.mean_sens_pu239_fission.get=grep("(.*).out"," pu-239       fission") >> get(1) >> between("fission","+\") >> asNumeric()
+output.mean_sens_pu239_fission.default=0.0001
+
+output.sigma_sens_pu239_fission.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-239")
+output.sigma_sens_pu239_fission.get=grep("(.*).out"," pu-239       fission") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_pu239_fission.default=0.0001
+
+output.mean_sens_pu239_nubar.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-239")
+output.mean_sens_pu239_nubar.get=grep("(.*).out"," pu-239       nubar") >> get(1) >> between("nubar","+\") >> asNumeric()
+output.mean_sens_pu239_nubar.default=0.0001
+
+output.sigma_sens_pu239_nubar.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-239")
+output.sigma_sens_pu239_nubar.get=grep("(.*).out"," pu-239       nubar") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_pu239_nubar.default=0.0001
+
+
+
+
+
+
+
+
+
+output.mean_sens_pu240_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-240")
+output.mean_sens_pu240_total.get=grep("(.*).out"," pu-240       total") >> get(1) >> between("total","+\") >> asNumeric()
+output.mean_sens_pu240_total.default=0.0001
+
+output.sigma_sens_pu240_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-240")
+output.sigma_sens_pu240_total.get=grep("(.*).out"," pu-240       total") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_pu240_total.default=0.0001
+
+output.mean_sens_pu240_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-240")
+output.mean_sens_pu240_scatter.get=grep("(.*).out"," pu-240       scatter") >> get(1) >> between("scatter","+\") >> asNumeric()
+output.mean_sens_pu240_scatter.default=0.0001
+
+output.sigma_sens_pu240_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-240")
+output.sigma_sens_pu240_scatter.get=grep("(.*).out"," pu-240       scatter") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_pu240_scatter.default=0.0001
+
+output.mean_sens_pu240_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-240")
+output.mean_sens_pu240_capture.get=grep("(.*).out"," pu-240       capture") >> get(1) >> between("capture","+\") >> asNumeric()
+output.mean_sens_pu240_capture.default=0.0001
+
+output.sigma_sens_pu240_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-240")
+output.sigma_sens_pu240_capture.get=grep("(.*).out"," pu-240       capture") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_pu240_capture.default=0.0001
+
+output.mean_sens_pu240_fission.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-240")
+output.mean_sens_pu240_fission.get=grep("(.*).out"," pu-240       fission") >> get(1) >> between("fission","+\") >> asNumeric()
+output.mean_sens_pu240_fission.default=0.0001
+
+output.sigma_sens_pu240_fission.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-240")
+output.sigma_sens_pu240_fission.get=grep("(.*).out"," pu-240       fission") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_pu240_fission.default=0.0001
+
+output.mean_sens_pu240_nubar.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-240")
+output.mean_sens_pu240_nubar.get=grep("(.*).out"," pu-240       nubar") >> get(1) >> between("nubar","+\") >> asNumeric()
+output.mean_sens_pu240_nubar.default=0.0001
+
+output.sigma_sens_pu240_nubar.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," pu-240")
+output.sigma_sens_pu240_nubar.get=grep("(.*).out"," pu-240       nubar") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_pu240_nubar.default=0.0001
+
+
+output.mean_sens_rh103_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," rh ")
+output.mean_sens_rh103_total.get=grep("(.*).out"," rh-103       total") >> get(1) >> between("total","+\") >> asNumeric()
+output.mean_sens_rh103_total.default=0.0001
+
+output.sigma_sens_rh103_total.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," rh ")
+output.sigma_sens_rh103_total.get=grep("(.*).out"," rh-103       total") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_rh103_total.default=0.0001
+
+output.mean_sens_rh103_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," rh ")
+output.mean_sens_rh103_scatter.get=grep("(.*).out"," rh-103       scatter") >> get(1) >> between("scatter","+\") >> asNumeric()
+output.mean_sens_rh103_scatter.default=0.0001
+
+output.sigma_sens_rh103_scatter.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," rh ")
+output.sigma_sens_rh103_scatter.get=grep("(.*).out"," rh-103       scatter") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_rh103_scatter.default=0.0001
+
+output.mean_sens_rh103_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," rh ")
+output.mean_sens_rh103_capture.get=grep("(.*).out"," rh-103       capture") >> get(1) >> between("capture","+\") >> asNumeric()
+output.mean_sens_rh103_capture.default=0.0001
+
+output.sigma_sens_rh103_capture.if=contains("(.*)","=tsunami-3d") & contains("(.*)"," rh ")
+output.sigma_sens_rh103_capture.get=grep("(.*).out"," rh-103       capture") >> get(1) >> after("\\-") >> trim() >> before(" ") >> asNumeric()
+output.sigma_sens_rh103_capture.default=0.0001
+
+
+
+
+
+
+
+
+
+output.mean_keff.if=true
+output.mean_keff.get=grep("(.*).out","best estimate system k-eff") >> get(0) >> between("k-eff","+ or -") >> asNumeric()
+output.mean_keff.default=1.0
+
+output.sigma_keff.if=true
+output.sigma_keff.get=grep("(.*).out","best estimate system k-eff") >> get(0) >> between("+ or -","***") >> asNumeric()
+output.sigma_keff.default=0.001
+
+
+output.mean_E_lethargy.if=true
+output.mean_E_lethargy.get=grep("(.*).out","Energy of average lethargy of Fission") >> get(0) >> between(")","+ or -") >> asNumeric()
+output.mean_E_lethargy.default=100
+
+output.sigma_E_lethargy.if=true
+output.sigma_E_lethargy.get=grep("(.*).out","Energy of average lethargy of Fission") >> get(0) >> between("+ or -","***") >> asNumeric()
+output.sigma_E_lethargy.default=10
+
+
+output.mean_nubar.if=true
+output.mean_nubar.get=grep("(.*).out","system nu bar") >> get(0) >> between("bar","+ or -") >> asNumeric()
+output.mean_nubar.default=1.0
+
+output.sigma_nubar.if=true
+output.sigma_nubar.get=grep("(.*).out","system nu bar") >> get(0) >> between("+ or -","***") >> asNumeric()
+output.sigma_nubar.default=0.001
+
+
+output.mean_free_path.if=true
+output.mean_free_path.get=grep("(.*).out","system mean free path") >> get(0) >> between(")","+ or -") >> asNumeric()
+output.mean_free_path.default=1.0
+
+output.sigma_free_path.if=true
+output.sigma_free_path.get=grep("(.*).out","system mean free path") >> get(0) >> between("+ or -","***") >> asNumeric()
+output.sigma_free_path.default=0.001
