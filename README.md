@@ -54,7 +54,7 @@ It supports the following syntax and features:
         ***                                                                                                              ***
         ***        system nu bar                                               2.59705E+00 + or -  4.42196E-04           ***
         ***                                                                                                              ***
-        ***        system mean free path (cm)                                  1.93135E+00 + or -  2.00548E-03           ***
+        ***        system mean free path (cm)                                  1.113135E+00 + or -  2.00548E-03           ***
         ***                                                                                                              ***
         ```
       * will return output:

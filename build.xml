@@ -3,7 +3,7 @@
     <!--property name="code.name" value="Scale" /--> <!-- This property is not set because it will change over tasks (see later tasks) -->
     <property name="install.dir" value="${basedir}/Funz-Scale" />
 
-    <property name="funz.release" value="v1.10" />
+    <property name="funz.release" value="v1.11" />
 
     <property name="build_plugin.xml" location="../funz-profile/build_plugin.xml" />
     <import file="${build_plugin.xml}"/>
