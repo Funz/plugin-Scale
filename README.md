@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Funz/plugin-Scale.png)](https://travis-ci.org/Funz/plugin-Scale)
+[![.github/workflows/ant.yml](https://github.com/Funz/plugin-Scale/actions/workflows/ant.yml/badge.svg)](https://github.com/Funz/plugin-Scale/actions/workflows/ant.yml)
 
 # Funz plugin: Scale
 
